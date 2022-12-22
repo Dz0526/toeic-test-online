@@ -9,7 +9,10 @@ export const AnswerChoices = ({
 }) => {
   const Option = ({ value }: { value: string }) => {
     return (
-      <RadioGroup.Option value={value} className='m-1 p-1 border rounded-lg '>
+      <RadioGroup.Option
+        value={value}
+        className='m-1 p-1 border rounded-lg self-center'
+      >
         <span>{value}</span>
       </RadioGroup.Option>
     );
@@ -17,7 +20,9 @@ export const AnswerChoices = ({
 
   return (
     <RadioGroup className={'flex h-12'}>
-      <RadioGroup.Label className='p-1 w-8'>{label}</RadioGroup.Label>
+      <RadioGroup.Label className='p-2 w-8 self-center'>
+        {label}
+      </RadioGroup.Label>
       {optionValues.map((optionValue, i) => (
         <Option key={i} value={optionValue} />
       ))}
