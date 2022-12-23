@@ -1,6 +1,8 @@
 import { AnswerChoices } from 'components/AnswerChoices';
+import { generateAnswerOptionsForm } from 'function/generate-answer-options-form';
 import type { NextPage } from 'next';
 import { useState } from 'react';
+import { AnswerOptions } from 'type/AnswerOptions';
 
 // color code #b7b7b7,#705c53 (mono)  #f3ebdf,#a95320 (kinako)  #faf7f0,#d8d2c2 (kinako ver.2)
 
@@ -22,6 +24,15 @@ const Button = ({
 
 const Home: NextPage = () => {
   const [page, setPage] = useState<Page>('listening');
+  const [answers, setAnswers] = useState<AnswerOptions[]>(
+    generateAnswerOptionsForm(),
+  );
+
+  const onChange = (i: number) => {
+    return (value: AnswerOptions) => {
+      setAnswers(answers.map((ans, index) => (index == i ? value : ans)));
+    };
+  };
 
   const ListeningPage = () => {
     return (
@@ -43,6 +54,8 @@ const Home: NextPage = () => {
               key={i + 1}
               label={i + 1}
               optionValues={['A', 'B', 'C', 'D']}
+              onChange={onChange(i + 1)}
+              answers={answers}
             />
           ))}
           {[...Array(25)].map((_, i) => (
@@ -50,6 +63,8 @@ const Home: NextPage = () => {
               key={i + 7}
               label={i + 7}
               optionValues={['A', 'B', 'C']}
+              onChange={onChange(i + 7)}
+              answers={answers}
             />
           ))}
           {[...Array(69)].map((_, i) => (
@@ -57,6 +72,8 @@ const Home: NextPage = () => {
               key={i + 32}
               label={i + 32}
               optionValues={['A', 'B', 'C', 'D']}
+              onChange={onChange(i + 32)}
+              answers={answers}
             />
           ))}
         </div>
@@ -84,6 +101,8 @@ const Home: NextPage = () => {
               key={i + 101}
               label={i + 101}
               optionValues={['A', 'B', 'C', 'D']}
+              onChange={onChange(i + 101)}
+              answers={answers}
             />
           ))}
         </div>
